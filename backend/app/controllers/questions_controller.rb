@@ -38,7 +38,6 @@ class QuestionsController < ActionController::API
   private
 
   def params_question
-    binding.pry
     params.require(:question).permit(:content)
   end
 

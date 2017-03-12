@@ -1,5 +1,6 @@
 export default function reducer(state={
     questions: [],
+    question: {},
     fetching: false,
     fetched: false,
     error: null,
@@ -26,11 +27,18 @@ export default function reducer(state={
         }
       }
 
-      case "ADD_QUESTION": {
+      case "ADD_QUESTION_FULFILLED": {
         return {
           ...state,
-          questions: [...state.questions, action.payload],
+          fetching: false,
+          fetched: true,
+          display_form: false,
+          questions: state.questions.concat(action.payload.data)
         }
+      }
+
+      case "ADD_QUESTION_REJECTED": {
+        return {...state, fetching: false, error: action.payload}
       }
 
       case "FORM_NEW_QUESTION": {

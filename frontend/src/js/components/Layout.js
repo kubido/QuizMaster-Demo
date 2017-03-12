@@ -8,6 +8,7 @@ import QuestionFormCreate from "./QuestionFormCreate"
 @connect((store) => {
   return {
     questions: store.questions.questions,
+    question: store.questions.question,
     display_form: store.questions.display_form,
     action_type: store.questions.action_type,
   };

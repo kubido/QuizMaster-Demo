@@ -36,7 +36,7 @@ export default class Layout extends React.Component {
   }
 
   handleSubmitCreateQuestion(values){
-    debugger
+    this.props.dispatch(actions.addQuestion(values));
   }
 
 
@@ -48,7 +48,7 @@ export default class Layout extends React.Component {
 
     if(display_form){
       return (
-        <QuestionFormCreate onSubmit={this.handleSubmitCreateQuestion}/>
+        <QuestionFormCreate onSubmit={this.handleSubmitCreateQuestion.bind(this)}/>
       )
     }
 

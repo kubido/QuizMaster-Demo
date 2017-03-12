@@ -29,10 +29,15 @@ export function displayQuestionFormEdit(){
     })
   }
 }
-export function addQuestion(id, text) {
-  return {
-    type: 'ADD_QUESTION',
-    payload: {action_type: 'new', display_form: false}
+export function addQuestion(values) {
+  return function(dispatch) {
+    axios.post("/api/questions")
+      .then((response) => {
+        dispatch({type: "ADD_QUESTION_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "ADD_QUESTION_REJECTED", payload: err})
+      })
   }
 }
 

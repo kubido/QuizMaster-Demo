@@ -18,9 +18,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'responders'
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'numbers_in_words'
 
 group :test do
-  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development, :test do

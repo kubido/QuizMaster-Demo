@@ -8,8 +8,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+require 'numbers_in_words'
+
 
 class Question < ApplicationRecord
+  validates_presence_of :content, :answer
 
   def attributes
     {

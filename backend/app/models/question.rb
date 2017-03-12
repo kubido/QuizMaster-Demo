@@ -4,21 +4,18 @@
 #
 #  id         :integer          not null, primary key
 #  content    :text
+#  answer     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Question < ApplicationRecord
-  has_many :answers, inverse_of: :question, dependent: :destroy
-  # validates_presence_of :content
-
-  accepts_nested_attributes_for :answers
 
   def attributes
     {
       id: id,
       content: content,
-      answers: answers
+      answer: answer
     }
 
   end

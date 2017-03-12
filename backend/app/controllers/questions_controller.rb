@@ -11,7 +11,7 @@ class QuestionsController < ActionController::API
   end
 
   def create
-    @question = Question.new(quiz_params)
+    @question = Question.new(params_question)
     if @question.save
       render json: {success: true, data: @question}
     else
@@ -37,8 +37,9 @@ class QuestionsController < ActionController::API
 
   private
 
-  def quiz_params
-    params.require(:quiz).permit(:content, answers_attributes: [:content, :correct])
+  def params_question
+    binding.pry
+    params.require(:question).permit(:content)
   end
 
   def set_question

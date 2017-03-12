@@ -31,7 +31,7 @@ export function displayQuestionFormEdit(){
 }
 export function addQuestion(values) {
   return function(dispatch) {
-    axios.post("/api/questions")
+    axios.post("/api/questions", values)
       .then((response) => {
         dispatch({type: "ADD_QUESTION_FULFILLED", payload: response.data})
       })

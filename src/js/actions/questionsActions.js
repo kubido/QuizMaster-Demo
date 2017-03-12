@@ -12,13 +12,27 @@ export function fetchQuestions() {
   }
 }
 
+export function displayQuestionFormNew(){
+  return function(dispatch) {
+    dispatch({
+      type: 'FORM_NEW_QUESTION',
+      payload: {action_type: 'new', display_form: true}
+    })
+  }
+}
+
+export function displayQuestionFormEdit(){
+  return function(dispatch) {
+    dispatch({
+      type: 'FORM_EDIT_QUESTION',
+      payload: {}
+    })
+  }
+}
 export function addQuestion(id, text) {
   return {
     type: 'ADD_QUESTION',
-    payload: {
-      id,
-      text,
-    },
+    payload: {action_type: 'new', display_form: false}
   }
 }
 

@@ -1,34 +1,74 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import { fetchQuestions } from "../actions/questionsActions"
+import * as actions from "../actions/questionsActions"
+import QuestionItem from "./QuestionItem"
+import QuestionFormCreate from "./QuestionFormCreate"
 
 @connect((store) => {
   return {
     questions: store.questions.questions,
-    // userFetched: store.user.fetched,
-    // tweets: store.tweets.tweets,
+    display_form: store.questions.display_form,
+    action_type: store.questions.action_type,
   };
 })
 export default class Layout extends React.Component {
   componentWillMount() {
-    // this.props.dispatch(fetchQuestions())
+    // this.props.dispatch(actions.fetchQuestions())
   }
 
   fetchQuestions() {
-    this.props.dispatch(fetchQuestions())
+    this.props.dispatch(actions.fetchQuestions())
   }
-  render() {
-    const { questions } = this.props;
 
+  displayQuestionForm(form_action){
+    switch (form_action) {
+      case 'new': {
+        this.props.dispatch(actions.displayQuestionFormNew());
+        break;
+      }
+
+      case 'edit' : {
+        this.props.dispatch(actions.displayQuestionFormEdit());
+        break;
+      }
+    }
+  }
+
+  handleSubmitCreateQuestion(values){
+    debugger
+  }
+
+
+  render() {
+    const { questions, display_form, action_type } = this.props;
     if (!questions.length) {
       return <button onClick={this.fetchQuestions.bind(this)}>load questions</button>
     }
 
-    const mappedQuestions = questions.map(question => <li>{question.content}</li>)
-    return <div>
-      <h1>List Question</h1>
-      <ul>{mappedQuestions}</ul>
-    </div>
+    if(display_form){
+      return (
+        <QuestionFormCreate onSubmit={this.handleSubmitCreateQuestion}/>
+      )
+    }
+
+    return (
+
+      <div>
+        <div>
+          <button onClick={this.displayQuestionForm.bind(this, 'new')}>Create new Question</button>
+          <ul>
+            {questions.map(question => {
+              return (
+                <li key={question.id}>
+                <QuestionItem question={question}></QuestionItem>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+
+      </div>
+    )
   }
 }

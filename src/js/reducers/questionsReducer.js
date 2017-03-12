@@ -3,15 +3,20 @@ export default function reducer(state={
     fetching: false,
     fetched: false,
     error: null,
+    display_form: false,
+    action_type: 'init'
   }, action) {
 
     switch (action.type) {
+
       case "FETCH_QUESTIONS": {
         return {...state, fetching: true}
       }
+
       case "FETCH_QUESTIONS_REJECTED": {
         return {...state, fetching: false, error: action.payload}
       }
+
       case "FETCH_QUESTIONS_FULFILLED": {
         return {
           ...state,
@@ -20,12 +25,30 @@ export default function reducer(state={
           questions: action.payload,
         }
       }
+
       case "ADD_QUESTION": {
         return {
           ...state,
           questions: [...state.questions, action.payload],
         }
       }
+
+      case "FORM_NEW_QUESTION": {
+        return {
+          ...state,
+          display_form: true,
+          action_type: 'new'
+        }
+      }
+
+      case "FORM_EDIT_QUESTION": {
+        return {
+          ...state,
+          display_form: true,
+          action_type: 'edit'
+        }
+      }
+
       case "UPDATE_QUESTION": {
         const { id, text } = action.payload
         const newQuestions = [...state.questions]

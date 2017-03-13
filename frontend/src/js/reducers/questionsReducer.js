@@ -6,7 +6,7 @@ export default function reducer(state={
     error: null,
     display_form: false,
     display_quiz: false,
-    answer: {},
+    answers: [],
     action_type: 'init'
   }, action) {
 
@@ -96,7 +96,12 @@ export default function reducer(state={
       }
 
       case "HIDE_FORM": {
-        return {...state, display_form: false, display_quiz: false}
+        return {
+          ...state, 
+          display_form: false, 
+          display_quiz: false,
+          answers: []
+        }
       }
 
       case "DISPLAY_QUIZ" : {
@@ -112,7 +117,7 @@ export default function reducer(state={
       case "SUBMIT_QUIZ_FULFILLED" : {
         return {
           ...state,
-          answer: action.payload.answer
+          answers: state.answers.concat(action.payload.answer)
         }        
       }
 

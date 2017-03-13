@@ -4,12 +4,11 @@ import { connect } from "react-redux"
 import { Field, reduxForm } from 'redux-form'
 
 @connect((store) => {
-
   return {
     question: store.questions.question,
     display_form: store.questions.display_form,
     display_quiz: store.questions.display_quiz,
-    answer: store.questions.answer
+    answers: store.questions.answers
   };
 })
 
@@ -19,11 +18,11 @@ export default class Quiz extends React.Component{
   }
 
   render(){
-    const { handleSubmit, question, answer } = this.props;
+    const { handleSubmit, question, answers } = this.props;
     return(
       <div>
-        <button class="btn btn-link" onClick={this.hideForm.bind(this)}> &lt; Back</button>
-        <p>ID: {answer.id}, Correct: {answer.correct ? "YES" : "NO"} </p>
+        <button class="btn btn-link" onClick={this.hideForm.bind(this)}> &lt; Back</button>              
+
         <h1>{question.content}</h1>
         <div class="well bs-component">
 
@@ -40,8 +39,18 @@ export default class Quiz extends React.Component{
               <button type="submit" class="btn btn-success">Submit</button>
             </fieldset>
 
-          </form>
+          </form>          
         </div>
+
+        {answers.map(function(answer, idx) {
+            return (
+              <div>
+                Correct: {answer.correct ? 
+                  <span class="label label-success">YES</span> : 
+                  <span class="label label-danger">NO</span>} 
+              </div>  
+            )
+          })}
       </div>
     )
   }

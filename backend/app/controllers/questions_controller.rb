@@ -35,9 +35,16 @@ class QuestionsController < ActionController::API
     end
   end
 
+  def submit
+    @question = Question.find(params[:question_id])
+    answer = params_question[:answer]
+    resp = {id: @question.id, correct: @question.valid_answer?(answer) }
+    render json: {success: true, answer: resp} 
+  end
+
   private
 
-  def params_question
+  def params_question    
     params.require(:question).permit(:content, :answer)
   end
 

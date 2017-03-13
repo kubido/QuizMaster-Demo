@@ -5,6 +5,8 @@ export default function reducer(state={
     fetched: false,
     error: null,
     display_form: false,
+    display_quiz: false,
+    answer: {},
     action_type: 'init'
   }, action) {
 
@@ -94,7 +96,24 @@ export default function reducer(state={
       }
 
       case "HIDE_FORM": {
-        return {...state, display_form: false}
+        return {...state, display_form: false, display_quiz: false}
+      }
+
+      case "DISPLAY_QUIZ" : {
+        var question = state.questions.find((x) => x.id === action.payload.question_id)
+        return {
+          ...state,
+          display_form: false,
+          display_quiz: true,
+          question: question,
+        }
+      }
+
+      case "SUBMIT_QUIZ_FULFILLED" : {
+        return {
+          ...state,
+          answer: action.payload.answer
+        }        
       }
 
     }      

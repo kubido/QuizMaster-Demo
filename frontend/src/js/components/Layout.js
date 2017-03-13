@@ -5,6 +5,7 @@ import * as actions from "../actions/questionsActions"
 import QuestionList from "./QuestionList"
 import QuestionFormCreate from "./QuestionFormCreate"
 import QuestionFormEdit from "./QuestionFormEdit"
+import Quiz from "./Quiz"
 
 @connect((store) => {
   return {
@@ -12,6 +13,7 @@ import QuestionFormEdit from "./QuestionFormEdit"
     question: store.questions.question,
     display_form: store.questions.display_form,
     action_type: store.questions.action_type,
+    display_quiz: store.questions.display_quiz,
   };
 })
 export default class Layout extends React.Component {
@@ -35,9 +37,13 @@ export default class Layout extends React.Component {
     this.props.dispatch(actions.updateQuestion(values));
   }
 
+  handleSubmitQuiz(values){
+    this.props.dispatch(actions.submitAnswers(values));
+  }
+
 
   render() {
-    const { questions, display_form, action_type } = this.props;
+    const { questions, display_form, action_type, display_quiz} = this.props;
 
     if(display_form && action_type == 'new'){
       return (
@@ -48,6 +54,12 @@ export default class Layout extends React.Component {
     if(display_form && action_type == 'edit'){
       return (
         <QuestionFormEdit onSubmit={this.handleSubmitEditQuestion.bind(this)} />
+      )
+    }
+
+    if(display_quiz){
+      return (
+        <Quiz onSubmit={this.handleSubmitQuiz.bind(this)} />
       )
     }
 

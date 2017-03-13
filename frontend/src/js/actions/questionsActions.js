@@ -50,6 +50,27 @@ export function hideForm() {
   }
 }
 
+export function displayQuestionQuiz(question_id){
+  return function(dispatch) {
+    dispatch({
+      type: 'DISPLAY_QUIZ',
+      payload: {question_id: question_id}
+    })
+  }
+}
+
+export function submitAnswers(values){
+  return function(dispatch) {
+    axios.post(`/api/questions/${values.id}/submit`, values)
+      .then((response) => {
+        dispatch({type: "SUBMIT_QUIZ_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "SUBMIT_QUIZ_REJECTED", payload: err})
+      })
+  }
+}
+
 export function updateQuestion(values) {
   return function(dispatch) {
     axios.put(`/api/questions/${values.id}`, values)

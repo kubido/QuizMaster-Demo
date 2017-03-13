@@ -17,7 +17,12 @@ export default class QuestionList extends React.Component{
     this.props.dispatch(actions.deleteQuestion(question_id));
   }
 
+  displayQuestionFormEdit(question_id){
+    this.props.dispatch(actions.displayQuestionFormEdit(question_id));
+  }
+
   render(){    
+
 
     return(
       <div>        
@@ -38,7 +43,7 @@ export default class QuestionList extends React.Component{
                     <td>{ question.content }</td>
                     <td>{ question.answer }</td>
                     <td>
-                      <span class="btn btn-link">Edit</span>
+                      <span class="btn btn-link" onClick={this.displayQuestionFormEdit.bind(this, question.id)}>Edit</span>
                       <span class="btn btn-link">Show</span>
                       <button class="btn btn-link" onClick={this.deleteQuestion.bind(this, question.id)}>Delete</button>
                     </td>

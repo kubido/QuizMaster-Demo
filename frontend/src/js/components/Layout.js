@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import * as actions from "../actions/questionsActions"
 import QuestionList from "./QuestionList"
 import QuestionFormCreate from "./QuestionFormCreate"
+import QuestionFormEdit from "./QuestionFormEdit"
 
 @connect((store) => {
   return {
@@ -22,18 +23,8 @@ export default class Layout extends React.Component {
     this.props.dispatch(actions.fetchQuestions())
   }
 
-  displayQuestionForm(form_action){
-    switch (form_action) {
-      case 'new': {
-        this.props.dispatch(actions.displayQuestionFormNew());
-        break;
-      }
-
-      case 'edit' : {
-        this.props.dispatch(actions.displayQuestionFormEdit());
-        break;
-      }
-    }
+  displayQuestionFormNew(form_action){
+    this.props.dispatch(actions.displayQuestionFormNew());
   }
 
   handleSubmitCreateQuestion(values){
@@ -44,9 +35,15 @@ export default class Layout extends React.Component {
   render() {
     const { questions, display_form, action_type } = this.props;
 
-    if(display_form){
+    if(display_form && action_type == 'new'){
       return (
-        <QuestionFormCreate onSubmit={this.handleSubmitCreateQuestion.bind(this)}/>
+        <QuestionFormCreate onSubmit={this.handleSubmitCreateQuestion.bind(this)} />
+      )
+    }
+
+    if(display_form && action_type == 'edit'){
+      return (
+        <QuestionFormEdit onSubmit={this.handleSubmitCreateQuestion.bind(this)} />
       )
     }
 
@@ -54,7 +51,7 @@ export default class Layout extends React.Component {
 
       <div>
         <div>
-          <button onClick={this.displayQuestionForm.bind(this, 'new')} class="btn btn-primary">Create new Question</button>
+          <button onClick={this.displayQuestionFormNew.bind(this)} class="btn btn-primary">Create new Question</button>
           <QuestionList questions={questions}/>
         </div>
 

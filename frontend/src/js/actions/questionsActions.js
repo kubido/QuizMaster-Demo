@@ -21,11 +21,11 @@ export function displayQuestionFormNew(){
   }
 }
 
-export function displayQuestionFormEdit(){
+export function displayQuestionFormEdit(question_id){
   return function(dispatch) {
     dispatch({
       type: 'FORM_EDIT_QUESTION',
-      payload: {}
+      payload: {question_id: question_id}
     })
   }
 }

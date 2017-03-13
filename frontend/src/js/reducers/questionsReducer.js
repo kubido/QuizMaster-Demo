@@ -51,10 +51,12 @@ export default function reducer(state={
       }
 
       case "FORM_EDIT_QUESTION": {
+        var question = state.questions.find((x) => x.id === action.payload.question_id)
         return {
           ...state,
           display_form: true,
-          action_type: 'edit'
+          action_type: 'edit',
+          question: question,
         }
       }
 

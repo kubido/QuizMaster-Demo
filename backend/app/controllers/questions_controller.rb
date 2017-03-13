@@ -20,8 +20,8 @@ class QuestionsController < ActionController::API
   end
 
   def update
-    if @question.update_attributes(question_params)
-      render json: {success: true, data: question}
+    if @question.update_attributes(params_question)
+      render json: {success: true, data: @question}
     else
       render json: {status: "Error", message: @question.errors.full_messages.join(", ")}
     end

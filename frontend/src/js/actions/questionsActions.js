@@ -50,10 +50,15 @@ export function hideForm() {
   }
 }
 
-export function updateQuestion(id, text) {
-  return {
-    type: 'UPDATE_QUESTION',
-    payload: {},
+export function updateQuestion(values) {
+  return function(dispatch) {
+    axios.put(`/api/questions/${values.id}`, values)
+      .then((response) => {
+        dispatch({type: "UPDATE_QUESTION_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "UPDATE_QUESTION_REJECTED", payload: err})
+      })
   }
 }
 

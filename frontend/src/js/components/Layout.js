@@ -31,6 +31,10 @@ export default class Layout extends React.Component {
     this.props.dispatch(actions.addQuestion(values));
   }
 
+  handleSubmitEditQuestion(values){
+    this.props.dispatch(actions.updateQuestion(values));
+  }
+
 
   render() {
     const { questions, display_form, action_type } = this.props;
@@ -43,7 +47,7 @@ export default class Layout extends React.Component {
 
     if(display_form && action_type == 'edit'){
       return (
-        <QuestionFormEdit onSubmit={this.handleSubmitCreateQuestion.bind(this)} />
+        <QuestionFormEdit onSubmit={this.handleSubmitEditQuestion.bind(this)} />
       )
     }
 

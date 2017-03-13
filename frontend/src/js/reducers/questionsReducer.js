@@ -60,17 +60,23 @@ export default function reducer(state={
         }
       }
 
-      case "UPDATE_QUESTION": {
-        const { id, text } = action.payload
-        const newQuestions = [...state.questions]
-        const tweetToUpdate = newTweets.findIndex(tweet => tweet.id === id)
-        newTweets[tweetToUpdate] = action.payload;
-
+      case "UPDATE_QUESTION_FULFILLED": {
         return {
           ...state,
-          tweets: newTweets,
+          fetching: false,
+          fetched: true,
+          display_form: false,
+          questions: state.questions.map(question => question.id === action.payload.data.id ?
+            action.payload.data : 
+            question
+        ) 
         }
       }
+
+      case "UPDATE_QUESTION_REJECTED": {
+        return {...state, fetching: false, error: action.payload}
+      }
+
       case "DELETE_QUESTION_FULFILLED": {
       
         var index = state.questions.findIndex((x) => x.id === action.payload.data.id); 

@@ -52,5 +52,13 @@ export function updateQuestion(id, text) {
 }
 
 export function deleteQuestion(id) {
-  return { type: 'DELETE_QUESTION', payload: id}
+  return function(dispatch) {
+    axios.delete(`/api/questions/${id}`)
+      .then((response) => {
+        dispatch({type: "DELETE_QUESTION_FULFILLED", payload: response.data})
+      })
+      .catch((err) => {
+        dispatch({type: "DELETE_QUESTION_REJECTED", payload: err})
+      })
+  }
 }

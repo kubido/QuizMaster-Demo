@@ -68,10 +68,19 @@ export default function reducer(state={
           tweets: newTweets,
         }
       }
-      case "DELETE_QUESTION": {
+      case "DELETE_QUESTION_FULFILLED": {
+      
+        var index = state.questions.findIndex((x) => x.id === action.payload.data.id); 
+        
         return {
           ...state,
-          tweets: state.tweets.filter(tweet => tweet.id !== action.payload),
+          fetching: false,
+          fetched: true,
+          display_form: false,
+          questions: [
+            ...state.questions.slice(0,index),
+            ...state.questions.slice(index+1)
+          ]
         }
       }
     }

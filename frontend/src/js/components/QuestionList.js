@@ -1,8 +1,24 @@
 import React from "react"
-import QuestionItem from './QuestionItem'
+import * as actions from "../actions/questionsActions"
+import { connect } from "react-redux"
+
+@connect((store) => {
+  return {
+    questions: store.questions.questions,
+    question: store.questions.question,
+    display_form: store.questions.display_form,
+    action_type: store.questions.action_type,
+  };
+})
 
 export default class QuestionList extends React.Component{
-  render(){
+
+  deleteQuestion(question_id){
+    this.props.dispatch(actions.deleteQuestion(question_id));
+  }
+
+  render(){    
+
     return(
       <div>        
         <table class="table table-striped table-hover ">
@@ -22,13 +38,14 @@ export default class QuestionList extends React.Component{
                     <td>{ question.content }</td>
                     <td>{ question.answer }</td>
                     <td>
-                      <span>Edit</span>
-                      <span>Show</span>
-                      <span>Delete</span>
+                      <span class="btn btn-link">Edit</span>
+                      <span class="btn btn-link">Show</span>
+                      <button class="btn btn-link" onClick={this.deleteQuestion.bind(this, question.id)}>Delete</button>
                     </td>
                   </tr>
               )
-            })}
+            }.bind(this)
+            )}
             
           </tbody>
         </table>

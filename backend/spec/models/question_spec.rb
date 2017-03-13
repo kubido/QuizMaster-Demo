@@ -20,8 +20,19 @@ RSpec.describe Question, :type => :model do
   end
 
   it "is convert number to words" do 
-    question = Question.create(content: "is USA is a country ?", answer: 5)
-    expect(question.answer).to eq("five")
+    question = Question.create(content: "how many day in a week ?", answer: 7)
+    expect(question.answer).to eq("seven")
   end
 
+  it "is valid answer with words" do 
+    question = Question.create(content: "how many day in a week ?", answer: "seven")
+    valid_answer = question.valid_answer?("seven")
+    expect(valid_answer).to eq(true)
+  end
+
+  it "is valid answer with integer" do 
+    question = Question.create(content: "how many day in a week ?", answer: "seven")
+    valid_answer = question.valid_answer?(7)
+    expect(valid_answer).to eq(true)
+  end
 end

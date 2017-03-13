@@ -17,11 +17,16 @@ class Question < ApplicationRecord
   before_create :convert_answer_number_to_words
 
   def convert_answer_number_to_words
-    self.answer = NumbersInWords.in_words(answer.to_i) if answer_is_number?
+    self.answer = NumbersInWords.in_words(answer.to_i) if answer_is_number?(self.answer)
   end
 
-  def answer_is_number?
-    true if Float(self.answer) rescue false
+  def answer_is_number?(str)
+    true if Float(str) rescue false
+  end
+
+  def valid_answer?(answer)
+    answer = NumbersInWords.in_words(answer.to_i) if answer_is_number?(answer)
+    self.answer == answer
   end
 
   def attributes

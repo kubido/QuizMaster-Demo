@@ -22,6 +22,7 @@ gem 'numbers_in_words'
 
 group :test do
   gem 'rspec-rails'
+  gem "database_cleaner"
 end
 
 group :development, :test do

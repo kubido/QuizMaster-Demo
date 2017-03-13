@@ -38,7 +38,7 @@ class QuestionsController < ActionController::API
   private
 
   def params_question
-    params.require(:question).permit(:content)
+    params.require(:question).permit(:content, :answer)
   end
 
   def set_question

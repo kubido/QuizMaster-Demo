@@ -37,6 +37,7 @@ export default function reducer(state={
         }
       }
 
+
       case "ADD_QUESTION_REJECTED": {
         return {...state, fetching: false, error: action.payload}
       }
@@ -83,7 +84,12 @@ export default function reducer(state={
           ]
         }
       }
-    }
+
+      case "HIDE_FORM": {
+        return {...state, display_form: false}
+      }
+
+    }      
 
     return state
 }

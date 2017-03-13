@@ -14,11 +14,17 @@ import * as actions from "../actions/questionsActions"
 
 class QuestionFormCreate extends React.Component{
 
+
+  hideForm(){
+    this.props.dispatch(actions.hideForm())
+  }
+
   render(){
     const { handleSubmit } = this.props;
 
     return(
       <div>
+        <button class="btn btn-link" onClick={this.hideForm.bind(this)}> &lt; Back</button>
         <h1>Create new Question</h1>
         <div class="well bs-component">
 

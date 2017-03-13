@@ -41,13 +41,19 @@ export function addQuestion(values) {
   }
 }
 
+export function hideForm() {
+  return function(dispatch) {
+    dispatch({
+      type: 'HIDE_FORM',
+      payload: {}
+    })
+  }
+}
+
 export function updateQuestion(id, text) {
   return {
     type: 'UPDATE_QUESTION',
-    payload: {
-      id,
-      text,
-    },
+    payload: {},
   }
 }
 

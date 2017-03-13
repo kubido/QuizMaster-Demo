@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 import * as actions from "../actions/questionsActions"
-import QuestionItem from "./QuestionItem"
+import QuestionList from "./QuestionList"
 import QuestionFormCreate from "./QuestionFormCreate"
 
 @connect((store) => {
@@ -15,7 +15,7 @@ import QuestionFormCreate from "./QuestionFormCreate"
 })
 export default class Layout extends React.Component {
   componentWillMount() {
-    // this.props.dispatch(actions.fetchQuestions())
+    this.props.dispatch(actions.fetchQuestions())
   }
 
   fetchQuestions() {
@@ -43,9 +43,6 @@ export default class Layout extends React.Component {
 
   render() {
     const { questions, display_form, action_type } = this.props;
-    if (!questions.length) {
-      return <button onClick={this.fetchQuestions.bind(this)}>load questions</button>
-    }
 
     if(display_form){
       return (
@@ -57,16 +54,8 @@ export default class Layout extends React.Component {
 
       <div>
         <div>
-          <button onClick={this.displayQuestionForm.bind(this, 'new')}>Create new Question</button>
-          <ul>
-            {questions.map(question => {
-              return (
-                <li key={question.id}>
-                <QuestionItem question={question}></QuestionItem>
-                </li>
-              )
-            })}
-          </ul>
+          <button onClick={this.displayQuestionForm.bind(this, 'new')} class="btn btn-primary">Create new Question</button>
+          <QuestionList questions={questions}/>
         </div>
 
       </div>

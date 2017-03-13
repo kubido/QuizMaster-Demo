@@ -19,14 +19,31 @@ class QuestionFormCreate extends React.Component{
 
     return(
       <div>
-        <form onSubmit={handleSubmit}>
-          <label>Question</label>
-          <Field name="content" component="input" type="text"/>
+        <h1>Create new Question</h1>
+        <div class="well bs-component">
 
+          <form onSubmit={handleSubmit} class="form-horizontal">
+            <fieldset>
+              
+              <div class="form-group">
+                <label for="content" class="col-lg-2 control-label">Question : </label>
+                <div class="col-lg-10">
+                  <Field name="content" component="input" type="text" class="form-control"/>
+                </div>
+              </div>
 
-          <button type="submit">Add</button>
+              <div class="form-group">
+                <label for="content" class="col-lg-2 control-label">Answer : </label>
+                <div class="col-lg-10">
+                  <Field name="answer" component="input" type="text" class="form-control"/>
+                </div>
+              </div>
 
-        </form>
+              <button type="submit" class="btn btn-success">Add</button>
+            </fieldset>
+
+          </form>
+        </div>
       </div>
     )
   }

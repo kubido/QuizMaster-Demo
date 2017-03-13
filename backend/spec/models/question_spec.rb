@@ -3,7 +3,6 @@ require 'spec_helper'
 RSpec.describe Question, :type => :model do
   subject { described_class.create(content: "is USA is a country ?", answer: "Yes") }
 
-
   it "is valid create question with valid attributes" do 
     expect(subject).to be_valid
   end
@@ -20,6 +19,9 @@ RSpec.describe Question, :type => :model do
     expect(counter).to eq(0)
   end
 
-  it "is valid answer with words"
-  it "is valid answer with integer"
+  it "is convert number to words" do 
+    question = Question.create(content: "is USA is a country ?", answer: 5)
+    expect(question.answer).to eq("five")
+  end
+
 end

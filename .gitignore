@@ -1,2 +1,1 @@
-frontend/node_modules
-backend/config/database.yml
+app/config/database.yml

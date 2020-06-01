@@ -8,12 +8,6 @@
 * rake db:create db:migrate
 * rails s
 
-
-### How to run frontend (Webpack) ###
-* cd ./frontend
-* npm install
-* npm run dev
-
 ### How to run Test ###
 * cd ./backend
 * RAILS_ENV=test rake db:create
